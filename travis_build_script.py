@@ -153,7 +153,7 @@ if not BUILD_LINUX_MAC:
 	# If using msvc linker, embed a manifest/change msvc linker options, as per
 	# https://www.reddit.com/r/rust/comments/8tooi0/hey_rustaceans_got_an_easy_question_ask_here/e1lk7tw?utm_source=share&utm_medium=web2x
 	loader_exe_name = '07th-Mod.Installer.Windows.exe'
-	call(['cargo', 'rustc', '--release', '--', '-C', 'link-arg=/MANIFEST:embed'], cwd=loader_src_folder)
+	call(['cargo', 'rustc', '--release', '--', '-C', 'link-arg=/MANIFEST:embed', '-C', "link-arg=/MANIFESTUAC:level='requireAdministrator' uiAccess='false'"], cwd=loader_src_folder)
 
 	# Copy the exe to the final output folder
 	shutil.copy('install_loader/target/release/install_loader.exe', os.path.join(output_folder, loader_exe_name))
